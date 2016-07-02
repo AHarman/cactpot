@@ -103,7 +103,7 @@ class CactpotBoard:
 			return total / num
 
 	def boardExpectedValue(self):
-		return max([self.lineExpectedValue(x) for x in range(8)])       # We're always going to pick the best one
+		return max([(self.lineExpectedValue(x), x) for x in range(8)])       # We're always going to pick the best one
 
 cpb = CactpotBoard()
 cpb.updateBoard(0, 0, 1)
