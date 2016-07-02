@@ -14,7 +14,7 @@ class CactpotBoard:
 	0 X X X
 	"""
 	
-	numbersLeft = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	numbersLeft = range(1, 10)
 
 	rewards = {  6: 10000,
 	             7:    36,
@@ -39,13 +39,19 @@ class CactpotBoard:
 	def __init__(self, board=None):
 		if board != None:
 			self.board = board
+			numbers = [n for n in board[0]+board[1]+board[2] if n]
+			self.numbersLeft = [n for n in range(1, 10) if n not in numbers]
 
 	def __str__(self):
-		string = ""
-		for row in self.board:
-			string += "\n"
-			for num in row:
-				string += "{: >4}".format(num) + " "
+		numbers = [str(n) if n else " " for n in self.board[0]+self.board[1]+self.board[2]]
+		string =  "3   4   5   6   7\n"
+		string += "  +---+---+---+\n"
+		string += "2 | " + numbers[0] + " | " + numbers[1] + " | " + numbers[2] + " |\n"
+		string += "  +---+---+---+\n"
+		string += "1 | " + numbers[3] + " | " + numbers[4] + " | " + numbers[5] + " |\n"
+		string += "  +---+---+---+\n"
+		string += "0 | " + numbers[6] + " | " + numbers[7] + " | " + numbers[8] + " |\n"
+		string += "  +---+---+---+"
 		return string
 
 	def updateBoard(self, row, col, value):
@@ -103,4 +109,4 @@ cpb = CactpotBoard()
 cpb.updateBoard(0, 0, 1)
 cpb.updateBoard(1, 1, 2)
 print cpb
-cpb.boardExpectedValue()
+print cpb.boardExpectedValue()
