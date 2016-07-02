@@ -143,5 +143,9 @@ class CactpotBoard:
 cpb = CactpotBoard()
 cpb.updateBoard(0, 0, 1)
 cpb.updateBoard(1, 1, 2)
+
+
+expectedValue = cpb.boardExpectedValue()
 print cpb
-print cpb.boardExpectedValue()
+print "Expected return: " + str(expectedValue[0])
+print "Best row: " + str(expectedValue[1])
