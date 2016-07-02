@@ -105,6 +105,41 @@ class CactpotBoard:
 	def boardExpectedValue(self):
 		return max([(self.lineExpectedValue(x), x) for x in range(8)])       # We're always going to pick the best one
 
+	def flipHorizontal(self):
+		self.board = [row[::-1] for row in self.board]
+
+	def flipVertical(self):
+		self.board = self.board[::-1]
+
+	def rotateClockwise(self):
+		self.board = zip(*self.board[::-1])
+
+	def transpose(self):
+		self.board = [list(x) for x in zip(*self.board)]
+
+	# Takes a tuple/list (row, col)
+	def isCorner(self, pos):
+		if (pos[0] in [0, 2]) and (pos[1] in [0, 2]):
+			return True
+		return False
+
+	# Takes a tuple/list (row, col)
+	def isCentre(self, pos):
+		if pos[0] == 1 and pos[1] == 1:
+			return True
+		return False
+
+	# If skips = 1, get the 2nd smallest, 2 is 3rd smallest
+	def getMinPos(self, skips=0):
+		smallest = 10
+		pos = (3, 3)
+		for row in range(len(self.board)):
+			for col in range(len(self.board[row])):
+				if board[row][col] and (board[row][col] > smallest):
+					smallest = board[row][col]
+					pos = (row, col)
+		return pos
+
 cpb = CactpotBoard()
 cpb.updateBoard(0, 0, 1)
 cpb.updateBoard(1, 1, 2)
